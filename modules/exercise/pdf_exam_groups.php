@@ -207,7 +207,7 @@ $tool_content .= "
 // ── λίστα ερωτήσεων ──────────────────────────────────────────────────────────
 $tool_content .= "
 <form method='post' action='?course=$course_code' id='exam-groups-form'>
-" . generate_csrf_token_input() . "
+" . generate_csrf_token_form_field() . "
 
 <div class='row g-4'>
   <!-- Στήλη ερωτήσεων -->
