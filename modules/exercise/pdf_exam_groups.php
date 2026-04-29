@@ -94,10 +94,17 @@ if (isset($_POST['generate'])) {
 
     $zip->close();
 
+    // Καθαρισμός οποιουδήποτε buffered output πριν στείλουμε το binary ZIP
+    while (ob_get_level()) {
+        ob_end_clean();
+    }
+
     $dl_name = preg_replace('/[^A-Za-z0-9_\-\. ]/', '', $exam_title) . " - {$langExamGroups}.zip";
     header('Content-Type: application/zip');
     header('Content-Disposition: attachment; filename="' . $dl_name . '"');
     header('Content-Length: ' . filesize($zip_tmp));
+    header('Pragma: no-cache');
+    header('Expires: 0');
     readfile($zip_tmp);
     unlink($zip_tmp);
     exit;
